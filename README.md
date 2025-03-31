@@ -15,6 +15,15 @@ implemented by the sending institution if it wants to be notified whenever
 CNR stands for Change Notification Receiver. For a detailed introduction on how
 CNR APIs work, please read [this page][cnr-intro].
 
+If HEI provides any API from the following group:
+* Outgoing Mobilities
+* Outgoing Mobilities CNR
+* Outgoing Mobilities Stats
+* Incoming Mobilities
+* Incoming Mobilities CNR
+
+it MUST provide all APIs from this group.
+
 
 Request method
 --------------
@@ -29,16 +38,10 @@ Request parameters
 Parameters MUST be provided in the `application/x-www-form-urlencoded` format.
 
 
-### `receiving_hei_id` (required)
-
-Identifier of the receiving HEI - the master of the Incoming Mobility objects
-which just have been changed.
-
-
 ### `omobility_id` (repeatable, required)
 
 A list of identifiers of Outgoing Mobility objects (no more than
-`<max-omobility-ids>` items). These identify the Mobility objects which have
+`<max-omobility-ids>` items). These identify the Mobility objects that have
 been recently updated on the caller's side.
 
 This parameter is *repeatable*, so the request MAY contain multiple occurrences
@@ -85,10 +88,7 @@ Safety measures
 
 It is NOT guaranteed that all notifications will be delivered to you promptly.
 Some notifications may also **not reach you at all**, e.g. due to
-implementation errors on the calling institution's server, or the fact that no
-Notification Sender daemon has been implemented there (see
-`<sends-notifications>` element in [Incoming Mobilities API][imobilities-api]'s
-`manifest-entry.xsd`).
+implementation errors on the calling institution's server.
 
 Therefore, you - the sending HEI, the implementer of this CNR API - SHOULD
 periodically verify if your copies are up-to-date, e.g. by periodically
@@ -96,7 +96,7 @@ fetching data for all your "live" `omobility_ids` directly from the `get`
 endpoint of [Incoming Mobilities API][imobilities-api].
 
 
-[develhub]: http://developers.erasmuswithoutpaper.eu/
+[develhub]: https://developers.erasmuswithoutpaper.eu/
 [statuses]: https://github.com/erasmus-without-paper/ewp-specs-management#statuses
 [registry-spec]: https://github.com/erasmus-without-paper/ewp-specs-api-registry
 [discovery-api]: https://github.com/erasmus-without-paper/ewp-specs-api-discovery
